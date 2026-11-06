@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Инструменты разработки и временные файлы
+.playwright-mcp/
+*.log
+.DS_Store
+Thumbs.db
