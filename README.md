@@ -113,6 +113,7 @@ Windows (PowerShell):
 
 ```powershell
 python -m venv .venv
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned -Force
 .venv\Scripts\Activate.ps1
 ```
 
@@ -122,6 +123,14 @@ macOS / Linux:
 python3 -m venv .venv
 source .venv/bin/activate
 ```
+
+> **Windows.** Строка `Set-ExecutionPolicy` снимает запрет PowerShell
+> на запуск скриптов активации — без неё команда `Activate.ps1` завершится
+> ошибкой *«Не удалось загрузить файл …Activate.ps1»*. Политика действует
+> только для текущего окна терминала и не меняет настройки системы.
+> Если политика задана организацией и команда не проходит — окружение
+> можно не активировать: используйте полный путь к Python из окружения,
+> например `.venv\Scripts\python.exe -m streamlit run app.py`.
 
 При успешной активации в начале строки появится `(.venv)`.
 
@@ -414,14 +423,31 @@ python --version
 
 Зависимости не установлены или окружение не активировано:
 
-```bash
+```powershell
 python -m venv .venv
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned -Force
 .venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
 python -m streamlit run app.py
 ```
 
-(На macOS / Linux вместо `.venv\Scripts\Activate.ps1` — `source .venv/bin/activate`.)
+(На macOS / Linux вместо первых трёх команд Windows — `python3 -m venv .venv`
+и `source .venv/bin/activate`.)
+
+### Ошибка «Не удалось загрузить файл …Activate.ps1»
+
+PowerShell запрещает запуск скриптов активации. Выполните перед активацией:
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned -Force
+```
+
+Она действует только для текущего окна. Если и она не помогает — обходите
+активацию полностью, вызывая Python из окружения напрямую:
+
+```powershell
+.venv\Scripts\python.exe -m streamlit run app.py
+```
 
 ### `ModuleNotFoundError: No module named '...'`
 
