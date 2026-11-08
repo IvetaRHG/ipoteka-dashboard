@@ -14,3 +14,8 @@ env/
 *.log
 .DS_Store
 Thumbs.db
+
+# Скриншоты проверки интерфейса (не входят в проект)
+theme_*.png
+tab_*.png
+dash_*.png
