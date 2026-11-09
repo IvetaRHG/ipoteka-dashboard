@@ -19,3 +19,6 @@ Thumbs.db
 theme_*.png
 tab_*.png
 dash_*.png
+
+# Вложенная копия репозитория (тест чистого клонирования)
+dashboard_ipoteka/
